@@ -1,4 +1,4 @@
-/*Question -2
+/*Question -6
 
 Toll Tax Calculation Using Switch Case
 
