@@ -1,3 +1,32 @@
+/*Question -2
+
+Toll Tax Calculation Using Switch Case
+
+`Scenario:`  
+A toll plaza charges different amounts 
+based on the vehicle type:  
+
+• `Car` • ₹50  
+• `Truck` • ₹100  
+• `Bike` • ₹20  
+• `Bus` • ₹80  
+
+Write a program using a `switch case` 
+to calculate the total `toll tax for N vehicles`.
+
+`Input Example:`  
+```
+Enter number of vehicles: 3
+Enter vehicle types: Car Truck Bike
+```
+
+`Output Example:`  
+```
+Total Toll Tax: ₹170
+```
+
+*/
+//solution
 #include<stdio.h>
 
 int main(){
