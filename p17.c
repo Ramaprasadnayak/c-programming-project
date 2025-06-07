@@ -1,3 +1,32 @@
+/*
+17.Write a C program to manage student data using structures. The program should:
+
+Accept details of multiple students, including Roll Number, Name, Course, and Marks.
+
+Store this data in a file named student_data.txt.
+
+Allow the user to search for a student by Roll Number.
+
+If the student is found, display the student’s details and confirm that the data has been stored in the file.
+
+If the student is not found or if file operations fail, print an appropriate error message.
+
+Requirements:
+
+Use a struct named Student with fields for roll number, name, course, and marks.
+
+Use typedef to simplify structure usage.
+
+Implement functions for:
+
+Storing student data in a file (storeinfile)
+
+Searching for a student by roll number (searchstudents)
+
+Handle file errors and search errors using a flag variable.
+*/
+
+//solution
 #include<stdio.h>
 struct Student{
     int roll,marks;

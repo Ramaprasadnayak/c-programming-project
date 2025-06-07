@@ -1,3 +1,42 @@
+/*
+18.Write a C program to manage and search customer order details using structures. The program should:
+
+Accept multiple customer orders, including:
+
+Customer ID
+
+Customer Name
+
+Product Name
+
+Amount
+
+Store all the customer details in a file named customer-details.txt.
+
+Allow the user to search for a customer using their ID.
+
+If the customer is found, display their order details and confirm that the record has been saved in the file.
+
+If the customer is not found or if file operations fail, display an appropriate error message.
+
+Requirements:
+
+Define a struct named customer with the mentioned fields.
+
+Use typedef for the struct.
+
+Create the following functions:
+
+storeinfile() – to write customer details to a file.
+
+searchForCustomer() – to find a customer by ID and return their index if found.
+
+Use a global flag variable to handle errors.
+
+Validate file creation and search results appropriately.
+*/
+
+//solution
 #include<stdio.h>
 char filename[]="customer-details.txt";
 int flag;
@@ -57,7 +96,7 @@ int main(){
     printf("Enter customer ID to be searched :");
     scanf("%d",&search);
     pos=searchForCustomer(c1,search,num);
-    if(flag=1){
+    if(flag==1){
         printf("Order found: %s - %s - %d",c1[pos].name,c1[pos].product,c1[pos].amount);
         printf("\nRecord saved in %s\n",filename);
     }

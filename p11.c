@@ -1,4 +1,5 @@
-/*11.Easy Pronunciation
+/*
+11.Easy Pronunciation
 Words that contain many consecutive consonants, like "schtschurowskia", are generally considered somewhat hard to pronounce.
 We say that a word is hard to pronounce if it contains 44 or more consonants in a row; otherwise it is easy to pronounce. For example, "apple" and "polish" are easy to pronounce, but "schtschurowskia" is hard to pronounce.
 You are given a string SS consisting of NN lowercase Latin characters. Determine whether it is easy to pronounce or not based on the rule above — print YES if it is easy to pronounce and NO otherwise.
@@ -41,6 +42,7 @@ Test case 33: polishpolish doesn't contain 44 or more consecutive consonants, so
 Test case 44: trysttryst contains 55 consecutive consonants, making it hard to pronounce.
 Test case 55: crycry doesn't contain any vowels, but its length is less than 44 so it's still easy to pronounce.
 */
+
 //solution
 #include <stdio.h>
 

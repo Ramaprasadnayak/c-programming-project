@@ -1,5 +1,5 @@
 /*Sort Array by Parity
-You are given an array of integers. Your task is to sort the array such that all odd numbers come before all even numbers while maintaining the original relative order of the odd and even numbers.
+16.You are given an array of integers. Your task is to sort the array such that all odd numbers come before all even numbers while maintaining the original relative order of the odd and even numbers.
 
 Input Format
 The first line contains an integer 
@@ -66,7 +66,7 @@ void sortArrayByParity(int* nums) {
 }
 
 int main() {
-    int N;
+    int n;
     scanf("%d", &n);
     N=n;
     int* nums = (int*)malloc(N * sizeof(int));

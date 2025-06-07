@@ -1,4 +1,5 @@
-/*13.Better Deal
+/*
+13.Better Deal
 
 There are 22 stores in Chefland and both sell the same product. The first store sells the product for 100100 rupees whereas the second store sells it for 200200 rupees.
 It is the holiday season and both stores have announced a special discount. The first store is providing a discount of AA percent on its product and the second store is providing a discount of BB percent on its product.
@@ -41,6 +42,7 @@ The second store has a discount of 7%7%. Thus, the final price of the product at
 Test case 44: The first store has a discount of 10%10%. Thus, the final price of product at first store would be 9090.
 The second store has a discount of 55%55%. Thus, the final price of the product at the second store would be 9090. The product at both stores would have same price.
 */
+
 //solution
 #include <stdio.h>
 

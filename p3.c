@@ -1,4 +1,5 @@
-/*3. Cricket Scoreboard System`
+/*
+3. Cricket Scoreboard System`
 `Scenario:`
 A `cricket club` records match scores in an array.
 The system should:
@@ -19,6 +20,7 @@ Highest Score: 320
 Lowest Score: 150
 Average Score: 234.8
 ```*/
+
 //Solution
 #include<stdio.h>
 

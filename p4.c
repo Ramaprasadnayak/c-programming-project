@@ -1,4 +1,5 @@
-/*`1. Election Vote Count (Using Arrays)`
+/*
+`1. Election Vote Count (Using Arrays)`
 `Problem Statement:`  
 A city conducts an election with `5 candidates`. 
 Citizens cast their votes (numbers `1 to 5` representing candidates). 
@@ -28,6 +29,8 @@ Candidate 4: 1 vote
 Candidate 5: 1 vote  
 Winner: Candidate 1  
 ```*/
+
+//solution
 #include<stdio.h>
 void countVotes(int votes[],int n,int candidatevote[]){
     for(int i=0;i<n;i++){

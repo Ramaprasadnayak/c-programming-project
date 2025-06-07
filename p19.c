@@ -1,5 +1,42 @@
+/*
+19.Write a C program to record and search weather data for multiple cities. The program should:
+
+Accept details for multiple cities including:
+
+City Name
+
+Temperature (°C)
+
+Humidity (%)
+
+Store the collected data in a text file named weather_data.txt.
+
+Allow the user to search for a city by name.
+
+If the city is found, display its temperature and humidity, and confirm that the data has been stored in the file.
+
+If the city is not found or file operations fail, display an appropriate error message.
+
+Specifications:
+
+Define a structure city with members: name, temperature, and humidity.
+
+Use a typedef for ease of usage.
+
+Implement the following functions:
+
+storeinfile() – writes all city weather details to a file.
+
+searchForCustomer() – searches for a city by name using strcmp() and returns its index.
+
+Use a global flag variable to track errors in file handling and search results.
+*/
+
+
+//solution
 #include<stdio.h>
 #include<string.h>
+
 char filename[]="weather_data.txt";
 int flag;
 
@@ -57,7 +94,7 @@ int main(){
     printf("Enter city name to be searched :");
     scanf("%s",search);
     pos=searchForCustomer(c1,search,num);
-    if(flag=1){
+    if(flag==1){
         printf("Weather found in %s : %dC , %d %% Humidity",c1[pos].name,c1[pos].temperature,c1[pos].humidity);
         printf("\nRecord saved in %s\n",filename);
     }

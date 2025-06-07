@@ -28,6 +28,7 @@ Charlie
 Enter destination to search: Mumbai
 Passengers traveling to Mumbai: Bob
 ```*/
+
 //solution
 #include<stdio.h>
 #include<string.h>

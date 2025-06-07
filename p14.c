@@ -1,4 +1,5 @@
-/*14.Hackerman
+/*
+14.Hackerman
 
 Hackerman wants to know who is the better player between Bob and Alice with the help of a game.
 
@@ -43,6 +44,7 @@ Test case 11: A=2A=2 and B=1B=1. Their sum is 2+1=32+1=3 which is a prime number
 Test case 22: A=1A=1 and B=1B=1. Their sum is 1+1=21+1=2 which is a prime number, so Alice wins.
 Test case 33: A=2A=2 and B=2B=2. Their sum is 2+2=42+2=4 which is not a prime number, so Bob wins.
 */
+
 //solution
 #include <stdio.h>
 

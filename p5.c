@@ -26,6 +26,7 @@ Eligible for Medical Insurance
 ```
 
 */
+
 //solution
 #include<stdio.h>
 #include<string.h>

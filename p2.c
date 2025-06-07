@@ -1,4 +1,5 @@
-/*`2. DNA Sequence Pattern Finder`
+/*
+`2. DNA Sequence Pattern Finder`
 `Scenario:`
 A `biotech lab` is analyzing DNA sequences. Given a `DNA string` (containing only 'A', 'T', 'G', 'C'), check if a `specific pattern exists in it`.
 

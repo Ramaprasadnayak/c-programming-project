@@ -1,4 +1,5 @@
-/*15.Apples and oranges
+/*
+15.Apples and oranges
 
 Rushitote went to a programming contest to distribute apples and oranges to the contestants.
 He has NN apples and MM oranges, which need to be divided equally amongst the contestants. Find the maximum possible number of contestants such that:

@@ -1,4 +1,32 @@
+/*
+8.Write a C program to perform the following operations for a class of students:
 
+Accept the number of students and subjects.
+
+Input the marks for each student in each subject.
+
+Calculate the total marks for each student.
+
+Sort the students in descending order based on their total marks.
+
+Display the total marks of all students after sorting.
+
+Use functions for:
+
+Reading marks (readmarks)
+
+Calculating total marks (calculatetotal)
+
+Sorting students (sortstudents)
+
+Swapping values (swap)
+
+Printing total marks (printtotalmarks)
+
+Note: Assume a maximum of 100 students and 10 subjects.
+ */
+
+ //solution
 #include<stdio.h>
 #define max 10
 void calculatetotal(int marks[][max],int num,int sub,int total[]){

@@ -1,5 +1,5 @@
 /*
-Greater Average
+9.Greater Average
 You are given 33 numbers A,B,A,B, and CC.
 Determine whether the average of AA and BB is strictly greater than CC or not?
 NOTE: Average of AA and BB is defined as (A+B)22(A+B)​. For example, average of 55 and 99 is 77, average of 55 and 88 is 6.56.5.
@@ -36,8 +36,9 @@ Test case 22: The average value of 55 and 88 is 6.56.5 which is strictly greater
 Test case 33: The average value of 55 and 77 is 66 which is not strictly greater than 66.
 Test case 44: The average value of 44 and 99 is 6.56.5 which is not strictly greater than 88.
 Test case 55: The average value of 33 and 77 is 55 which is strictly greater than 22.
-
 */
+
+//solution
 #include <stdio.h>
 
 int main() {

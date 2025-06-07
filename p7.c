@@ -1,4 +1,5 @@
-/*Question -07
+/*
+Question -07
 
 `ATM Transaction System`  
 `Scenario:`  
@@ -24,6 +25,7 @@ Enter Amount: 2000
 ```
 Transaction Successful. Remaining Balance: ₹8000
 ```*/
+
 //solution
 #include<stdio.h>
 int withdraw(int amount,int val){

@@ -1,4 +1,5 @@
-/*Question -6
+/*
+Question -6
 
 Toll Tax Calculation Using Switch Case
 
@@ -26,6 +27,7 @@ Total Toll Tax: ₹170
 ```
 
 */
+
 //solution
 #include<stdio.h>
 
