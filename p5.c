@@ -1,60 +1,84 @@
 /*
-`1. Medical Insurance Eligibility Checker`  
-`Scenario:`  
-A hospital wants to check 
-if a `patient qualifies 
-for insurance coverage` based on these conditions:  
+5.Better Deal
 
-• Age `between 18 and 60`  
-• No `pre-existing health condition` (yes/no)  
-• Monthly salary `≥ ₹25,000`  
+There are 22 stores in Chefland and both sell the same product. The first store sells the product for 100100 rupees whereas the second store sells it for 200200 rupees.
+It is the holiday season and both stores have announced a special discount. The first store is providing a discount of AA percent on its product and the second store is providing a discount of BB percent on its product.
+Chef is wondering which store is selling the product at a cheaper price after the discount has been applied. Can you help him identify the better deal?
 
-Write a program using a `function` 
-to check if a patient is eligible 
-for `medical insurance`.
+Input Format
+    The first line of input will contain a single integer TT, denoting the number of test cases.
+    Each test case consists of a single line of input containing two space-separated integers AA and BB denoting the discount provided by the first and second store respectively.
+Output Format
+For each test case, output FIRST if the first store is cheaper, SECOND if the second store is cheaper, and BOTH if both the stores are selling the product for the same price after discount.
 
-`Input Example:`  
-```
-Enter Age: 45
-Any Pre-existing Condition? (yes/no): no
-Enter Monthly Salary: 30000
-```
+The checker is case-insensitive so answers like FiRsT, first, and FIRST would be considered the same.
+Constraints
+    1≤T≤10001≤T≤1000
+    1≤A,B≤1001≤A,B≤100
 
-`Output Example:`  
-```
-Eligible for Medical Insurance
-```
+Sample 1:
+Input
+4
+5 20
+10 60
+7 7
+10 55
 
+output
+FIRST
+SECOND
+FIRST
+BOTH
+Explanation:
+Test case 11: The first store has a discount of 5%5%. Thus, the final price of product at first store would be 9595.
+The second store has a discount of 20%20%. Thus, the final price of the product at the second store would be 160160. The product at the first store would be cheaper.
+
+Test case 22: The first store has a discount of 10%10%. Thus, the final price of product at first store would be 9090.
+The second store has a discount of 60%60%. Thus, the final price of the product at the second store would be 8080. The product at the second store would be cheaper.
+
+Test case 33: The first store has a discount of 7%7%. Thus, the final price of product at first store would be 9393.
+The second store has a discount of 7%7%. Thus, the final price of the product at the second store would be 186186. The product at the first store would be cheaper.
+
+Test case 44: The first store has a discount of 10%10%. Thus, the final price of product at first store would be 9090.
+The second store has a discount of 55%55%. Thus, the final price of the product at the second store would be 9090. The product at both stores would have same price.
 */
 
 //solution
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
 
-int checkeligibility(int age,char choice[],int salary){
-    if((age>=18 && age<=60) && (strcmp(choice,"no")==0) && (salary>=25000)){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+int storeA(int a){
+    int amount=0,dis=0;
+    dis=(100*a)/100;
+    amount=100-dis;
+    return amount;
 }
 
-int main(){
-    int age,salary,flag;
-    char choice[10];
-    printf("Enter the Age: ");
-    scanf("%d",&age);
-    printf("Any Pre-existing Condition? (yes/no): ");
-    scanf("%s",choice);
-    printf("Enter Monthly Salary: ");
-    scanf("%d",&salary);
-    flag=checkeligibility(age,choice,salary);
-    if(flag==1){
-        printf("Eligible for Medical Insurance");
-    }
-    else{
-        printf("Not eligible for Medical Insurance");
-    }
+int storeB(int b){
+    int amount=0,dis=0;
+    dis=(200*b)/100;
+    amount=200-dis;
+    return amount;
+}
+
+
+int main() {
+	int test;
+	int am1,am2,a,b;
+	scanf("%d",&test);
+	for(int i=0;i<test;i++){
+	    scanf("%d%d",&a,&b);
+	    am1=storeA(a);
+	    am2=storeB(b);
+	    if(am1<am2){
+	        printf("FIRST\n");
+	    }
+	    else if(am1>am2){
+	        printf("SECOND\n");
+	    }
+	    else if(am1==am2){
+	        printf("BOTH\n");
+	    }
+	}
     return 0;
 }
+

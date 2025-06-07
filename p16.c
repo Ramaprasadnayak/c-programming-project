@@ -1,85 +1,59 @@
-/*Sort Array by Parity
-16.You are given an array of integers. Your task is to sort the array such that all odd numbers come before all even numbers while maintaining the original relative order of the odd and even numbers.
+/*
+Question -16
 
-Input Format
-The first line contains an integer 
-N
-N (the array size).
-The second line contains 
-N
-N space-separated integers representing the elements of the array.
-Output Format
-Output the sorted array where all odd numbers appear before all even numbers, maintaining the relative order.
+Toll Tax Calculation Using Switch Case
 
-Constraints
-1
-≤
-N
-≤
-1
-0
-5
-1≤N≤10 
-5
- 
-0
-≤
-a
-[
-i
-]
-≤
-1
-0
-9
-0≤a[i]≤10 
-9
- 
-Sample 1:
-Input
-Output
-5
-3 1 2 4 5
-3 1 5 2 4
-Explanation:
-In the given array, the odd numbers are 3,1 and 5, and the even numbers are 2 and 4. After sorting by parity while maintaining the original order, the result is 3,1,5,2,4.
+`Scenario:`  
+A toll plaza charges different amounts 
+based on the vehicle type:  
 
-Sample 2:
-Input
-Output
-6
-2 4 6 1 3 5
-1 3 5 2 4 6
-Explanation:
-In the given array, the odd numbers are 1,3 and 5, and the even numbers are 2,4 and 6. After sorting by parity while maintaining the original order, the result is 1,3,5,2,4,6.*/
+• `Car` • ₹50  
+• `Truck` • ₹100  
+• `Bike` • ₹20  
+• `Bus` • ₹80  
 
+Write a program using a `switch case` 
+to calculate the total `toll tax for N vehicles`.
 
+`Input Example:`  
+```
+Enter number of vehicles: 3
+Enter vehicle types: Car Truck Bike
+```
 
+`Output Example:`  
+```
+Total Toll Tax: ₹170
+```
+
+*/
 
 //solution
+#include<stdio.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-int N;
-void sortArrayByParity(int* nums) {
-    // Write your code here
-}
-
-int main() {
-    int n;
-    scanf("%d", &n);
-    N=n;
-    int* nums = (int*)malloc(N * sizeof(int));
-    for (int i = 0; i < N; i++) {
-        scanf("%d", &nums[i]);
+int main(){
+    int num,tax=0;
+    char name[100];
+    printf("Enter number of vehicles: ");
+    scanf("%d",&num);
+    printf("Enter vehicle types\n('c' for car,'b' for bus ,'t' for truck,'s' for bike): ");
+    for(int i=0;i<num;i++){
+        scanf(" %c",&name[i]);
     }
+    for(int j=0;j<num;j++){
+        switch(name[j]){
+            case 'c':tax+=50;
+            break;
+            case 'b':tax+=80;
+            break;
+            case 't':tax+=100;
+            break;
+            case 's':tax+=20;
+            break;
+            default:printf("\ninvalid entery at %d position\n",j+1);
+        }
 
-    sortArrayByParity(nums);
-
-    for (int i = 0; i < N; i++) {
-        printf("%d ", nums[i]);
     }
-
-    free(nums);
+    printf("Total Toll Tax: %d",tax);
     return 0;
 }

@@ -1,107 +1,84 @@
 /*
-18.Write a C program to manage and search customer order details using structures. The program should:
+18.Write a C program to perform the following operations for a class of students:
 
-Accept multiple customer orders, including:
+Accept the number of students and subjects.
 
-Customer ID
+Input the marks for each student in each subject.
 
-Customer Name
+Calculate the total marks for each student.
 
-Product Name
+Sort the students in descending order based on their total marks.
 
-Amount
+Display the total marks of all students after sorting.
 
-Store all the customer details in a file named customer-details.txt.
+Use functions for:
 
-Allow the user to search for a customer using their ID.
+Reading marks (readmarks)
 
-If the customer is found, display their order details and confirm that the record has been saved in the file.
+Calculating total marks (calculatetotal)
 
-If the customer is not found or if file operations fail, display an appropriate error message.
+Sorting students (sortstudents)
 
-Requirements:
+Swapping values (swap)
 
-Define a struct named customer with the mentioned fields.
+Printing total marks (printtotalmarks)
 
-Use typedef for the struct.
+Note: Assume a maximum of 100 students and 10 subjects.
+ */
 
-Create the following functions:
-
-storeinfile() – to write customer details to a file.
-
-searchForCustomer() – to find a customer by ID and return their index if found.
-
-Use a global flag variable to handle errors.
-
-Validate file creation and search results appropriately.
-*/
-
-//solution
+ //solution
 #include<stdio.h>
-char filename[]="customer-details.txt";
-int flag;
-
-struct customer{
-    int id;
-    char name[20];
-    char product[20];
-    int amount;
-};
-typedef struct customer customer;
-
-void storeinfile(customer c1[],int num){
-    FILE *file=fopen(filename,"w");
-    if(file==NULL){
-        printf("Error in creating the file!\n");
-        flag=0;
-    }
-    else{
+#define max 10
+void calculatetotal(int marks[][max],int num,int sub,int total[]){
     for(int i=0;i<num;i++){
-        fprintf(file,"Customer %d\n  Id : %d\n  Name : %s\n  Product :%s\n  Amount : %d\n\n",i+1,c1[i].id,c1[i].name,c1[i].product,c1[i].amount);
-    }
-    fclose(file);
-    flag=1;
-    }
-}
-
-int searchForCustomer(customer c1[],int search,int num){
-    int pos,point=0;
-    for (int i=0;i<num;i++){
-        if(c1[i].id==search){
-            pos=i;
-            point=1;
-            break;
+        total[i]=0;
+        for(int j=0;j<sub;j++){
+            total[i]+=marks[i][j];
         }
     }
-    if(point==1){
-        return pos;
-    }
-    else{
-        flag=0;
-    }
-    
 }
 
+void swap(int *first,int *second){
+    int temp=(*first);
+    (*first)=(*second);
+    (*second)=(temp);
+}
+
+void sortstudents(int total[],int num){
+    int isswapped=0;
+    do{
+    for(int i=0;i<num-1;i++){
+        if(total[i]<total[i+1]){
+            swap(&total[i],&total[i+1]);
+            isswapped=1;
+        }
+    }
+    num--;
+}while(isswapped);
+}
+void readmarks(int marks[][max],int num,int sub){
+    printf("Enter marks:");
+    for(int i=0;i<num;i++){
+        for(int j=0;j<sub;j++){
+            scanf("%d",&marks[i][j]);
+        }
+    }
+}
+void printtotalmarks(int total[],int num){
+    for(int i=0;i<num;i++){
+        printf("Total marks: %d",total[i]);
+    }
+}
 int main(){
-    int num,search,pos;
-    printf("Enter number of orders :");
+    int num,sub,total[100];
+    int marks[100][max];
+    printf("Enter number of students:");
     scanf("%d",&num);
-    customer c1[num];
-    printf("(Id,Name,Product,Amount)\n");
-    for (int i=0;i<num;i++){
-        printf("Order %d :",i+1);
-        scanf("%d%s%s%d",&c1[i].id,c1[i].name,c1[i].product,&c1[i].amount);
-    }
-    storeinfile(c1,num);
-    printf("Enter customer ID to be searched :");
-    scanf("%d",&search);
-    pos=searchForCustomer(c1,search,num);
-    if(flag==1){
-        printf("Order found: %s - %s - %d",c1[pos].name,c1[pos].product,c1[pos].amount);
-        printf("\nRecord saved in %s\n",filename);
-    }
-    else{
-        printf("Error!");
-    }
+    printf("Enter number of subjects:");
+    scanf("%d",&sub);
+    readmarks(marks,num,sub);
+    sortstudents(total,num);
+    calculatetotal(marks,num,sub,total);
+    printtotalmarks(total,num);
     return 0;
 }

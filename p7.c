@@ -1,81 +1,59 @@
 /*
-Question -07
+7.Apples and oranges
 
-`ATM Transaction System`  
-`Scenario:`  
-An ATM allows users to:  
-1. `Withdraw Money`  
-2. `Deposit Money`  
-3. `Check Balance`  
+Rushitote went to a programming contest to distribute apples and oranges to the contestants.
+He has NN apples and MM oranges, which need to be divided equally amongst the contestants. Find the maximum possible number of contestants such that:
 
-Use a `function with switch-case` 
-to `simulate an ATM transaction`.
+    Every contestant gets an equal number of apples; and
+    Every contestant gets an equal number of oranges.
 
-`Input Example:`  
-```
-Enter your choice:
-1. Withdraw
-2. Deposit
-3. Check Balance
-Choice: 1
-Enter Amount: 2000
-```
+Note that every fruit with Rushitote must be distributed, there cannot be any left over.
 
-`Output Example:`  
-```
-Transaction Successful. Remaining Balance: ₹8000
-```*/
+For example, 22 apples and 44 oranges can be distributed equally to two contestants, where each one receives 11 apple and 22 oranges.
+However, 22 apples and 55 oranges can only be distributed equally to one contestant.
+Input Format
+    The first line of input will contain a single integer TT, denoting the number of test cases.
+    The first and only line of each test case contains two space-separated integers NN and MM — the number of apples and oranges, respectively.
+Output Format
+For each test case, output on a new line the answer: the maximum number of contestants such that everyone receives an equal number of apples and an equal number of oranges.
+Constraints
+    1≤T≤10001≤T≤1000
+    1≤N,M≤1091≤N,M≤109
+Sample 1:
+Input
+3
+1 5
+2 4
+4 6
+Output
+1
+2
+2
+
+Explanation:
+Test case 11: There's only one apple, so distributing to more than one person is impossible.
+Test case 22: As explained in the statement, 22 people can each receive 11 apple and 22 oranges.
+Test case 33: 22 people can each receive 22 apples and 33 oranges. It's not possible to distribute equally to more than two people.
+*/
 
 //solution
-#include<stdio.h>
-int withdraw(int amount,int val){
-    if((amount-val) <0){
-        printf("Insufficient bank balance..");
+#include <stdio.h>
+#include<stdlib.h>
+
+int main() {
+	int test,a,b,c,temp;
+	scanf("%d",&test);
+	for(int i=0;i<test;i++){
+	    scanf("%d%d",&a,&b);
+        while(b!=0){
+        temp=b;
+        b=a%b;
+        a=temp;
     }
-    else{
-        amount-=val;
-        printf("%d amount withdrawed\n",val);
-    }
-    return amount;
+    c=abs(a);
+    printf("%d\n",c);
+	}
+	return 0;
 }
 
-int deposit(int amount,int val){
-    amount+=val;
-    printf("%d amount deposited",val);
-    return amount;
-}
 
-void checkbalance(int amount){
-    printf("The current bank balance is: %d",amount);
-}
-
-int main(){
-    int choice,i,amount=0,val;
-    while(choice!=4){
-    printf("\nEnter your choice:\n1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit\nChoice: ");
-    scanf("%d",&choice);
-    switch(choice){
-        case 1:
-        printf("Enter value to be withdrawed: ");
-        scanf("%d",&val);
-        amount=withdraw(amount,val);
-        break;
-
-        case 2:
-        printf("Enter value to be deposited: ");
-        scanf("%d",&val);
-        amount=deposit(amount,val);
-        break;
-        
-        case 3:checkbalance(amount);
-        break;
-        
-        case 4:printf("Thank You");
-        break;
-
-        default:printf("Enter a valid choice");
-
-    }
-}
-return 0;
-}

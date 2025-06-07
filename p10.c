@@ -1,43 +1,107 @@
 /*
-10.Janmansh and Assignments
+10.Write a C program to manage and search customer order details using structures. The program should:
 
-Janmansh has to submit 33 assignments for Chingari before 1010 pm and he starts to do the assignments at XX pm. Each assignment takes him 11 hour to complete. Can you tell whether he'll be able to complete all assignments on time or not?
-Input Format
-    The first line will contain TT - the number of test cases. Then the test cases follow.
-    The first and only line of each test case contains one integer XX - the time when Janmansh starts doing the assignments.
-Output Format
-For each test case, output Yes if he can complete the assignments on time. Otherwise, output No.
-You may print each character of Yes and No in uppercase or lowercase (for example, yes, yEs, YES will be considered identical).
-Constraints
-    1≤T≤101≤T≤10
-    1≤X≤91≤X≤9
-Sample 1:
-Input
-2
-7
-9
-Output
-Yes
-No
-Explanation:
-Test case-1: He can start at 77pm and finish by 1010 pm. Therefore he can complete the assignments.
-Test case-2: He can not complete all the 33 assignments if he starts at 99 pm.
+Accept multiple customer orders, including:
+
+Customer ID
+
+Customer Name
+
+Product Name
+
+Amount
+
+Store all the customer details in a file named customer-details.txt.
+
+Allow the user to search for a customer using their ID.
+
+If the customer is found, display their order details and confirm that the record has been saved in the file.
+
+If the customer is not found or if file operations fail, display an appropriate error message.
+
+Requirements:
+
+Define a struct named customer with the mentioned fields.
+
+Use typedef for the struct.
+
+Create the following functions:
+
+storeinfile() – to write customer details to a file.
+
+searchForCustomer() – to find a customer by ID and return their index if found.
+
+Use a global flag variable to handle errors.
+
+Validate file creation and search results appropriately.
 */
 
-//Solution
-#include <stdio.h>
+//solution
+#include<stdio.h>
+char filename[]="customer-details.txt";
+int flag;
 
-int main() {
-	int test,t;
-	scanf("%d",&test);
-	for(int i=0;i<test;i++){
-	    scanf("%d",&t);//in pm
-        if(t<=7){
-            printf("YES\n");
-        }	   
-        else{
-            printf("NO\n");
+struct customer{
+    int id;
+    char name[20];
+    char product[20];
+    int amount;
+};
+typedef struct customer customer;
+
+void storeinfile(customer c1[],int num){
+    FILE *file=fopen(filename,"w");
+    if(file==NULL){
+        printf("Error in creating the file!\n");
+        flag=0;
+    }
+    else{
+    for(int i=0;i<num;i++){
+        fprintf(file,"Customer %d\n  Id : %d\n  Name : %s\n  Product :%s\n  Amount : %d\n\n",i+1,c1[i].id,c1[i].name,c1[i].product,c1[i].amount);
+    }
+    fclose(file);
+    flag=1;
+    }
+}
+
+int searchForCustomer(customer c1[],int search,int num){
+    int pos,point=0;
+    for (int i=0;i<num;i++){
+        if(c1[i].id==search){
+            pos=i;
+            point=1;
+            break;
         }
-	}
+    }
+    if(point==1){
+        return pos;
+    }
+    else{
+        flag=0;
+    }
+    
+}
 
+int main(){
+    int num,search,pos;
+    printf("Enter number of orders :");
+    scanf("%d",&num);
+    customer c1[num];
+    printf("(Id,Name,Product,Amount)\n");
+    for (int i=0;i<num;i++){
+        printf("Order %d :",i+1);
+        scanf("%d%s%s%d",&c1[i].id,c1[i].name,c1[i].product,&c1[i].amount);
+    }
+    storeinfile(c1,num);
+    printf("Enter customer ID to be searched :");
+    scanf("%d",&search);
+    pos=searchForCustomer(c1,search,num);
+    if(flag==1){
+        printf("Order found: %s - %s - %d",c1[pos].name,c1[pos].product,c1[pos].amount);
+        printf("\nRecord saved in %s\n",filename);
+    }
+    else{
+        printf("Error!");
+    }
+    return 0;
 }

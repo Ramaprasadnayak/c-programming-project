@@ -1,4 +1,5 @@
-/*1. Flight Ticket Booking System`
+/*
+1. Flight Ticket Booking System`
 `Scenario:`
 A travel agency wants to `store the details of N passengers` (Name, Age, Destination).
 The system should allow:

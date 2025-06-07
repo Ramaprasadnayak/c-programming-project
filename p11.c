@@ -1,78 +1,105 @@
 /*
-11.Easy Pronunciation
-Words that contain many consecutive consonants, like "schtschurowskia", are generally considered somewhat hard to pronounce.
-We say that a word is hard to pronounce if it contains 44 or more consonants in a row; otherwise it is easy to pronounce. For example, "apple" and "polish" are easy to pronounce, but "schtschurowskia" is hard to pronounce.
-You are given a string SS consisting of NN lowercase Latin characters. Determine whether it is easy to pronounce or not based on the rule above — print YES if it is easy to pronounce and NO otherwise.
-For the purposes of this problem, the vowels are the characters {a,e,i,o,u}{a,e,i,o,u} and the consonants are the other 2121 characters.
-Input Format
+11.Write a C program to record and search weather data for multiple cities. The program should:
 
-    The first line of input will contain a single integer TT, denoting the number of test cases.
-    Each test case consists of two lines of input.
-        The first line of each test case contains a single integer NN, the length of string SS.
-        The second line of each test case contains the string SS.
+Accept details for multiple cities including:
 
-Output Format
-For each test case, output on a new line the answer — YES if SS is easy to pronounce, and NO otherwise.
-Each character of the output may be printed in either uppercase or lowercase. For example, the strings YES, yeS, yes, and YeS will all be treated as identical.
-Constraints
+City Name
 
-    1≤T≤1001≤T≤100
-    1≤N≤1001≤N≤100
-    SS contains only lowercase Latin characters, i.e, the characters {a,b,c,…,z}{a,b,c,…,z}
+Temperature (°C)
 
-Sample 1:
-Input
-5
-apple     5
-schtschurowskia    15
-polish     6
-tryst      5
-cry        3 
+Humidity (%)
 
-output:
-YES
-NO
-YES
-NO
-YES
-Explanation:
-Test case 11: "appleapple" doesn't have 44 or move consecutive consonants, which makes it easy to pronounce.
-Test case 22: "schtschurowskiaschtschurowskia" has 77 consecutive consonants, which makes it hard to pronounce.
-Test case 33: polishpolish doesn't contain 44 or more consecutive consonants, so it's easy to pronounce.
-Test case 44: trysttryst contains 55 consecutive consonants, making it hard to pronounce.
-Test case 55: crycry doesn't contain any vowels, but its length is less than 44 so it's still easy to pronounce.
+Store the collected data in a text file named weather_data.txt.
+
+Allow the user to search for a city by name.
+
+If the city is found, display its temperature and humidity, and confirm that the data has been stored in the file.
+
+If the city is not found or file operations fail, display an appropriate error message.
+
+Specifications:
+
+Define a structure city with members: name, temperature, and humidity.
+
+Use a typedef for ease of usage.
+
+Implement the following functions:
+
+storeinfile() – writes all city weather details to a file.
+
+searchForCustomer() – searches for a city by name using strcmp() and returns its index.
+
+Use a global flag variable to track errors in file handling and search results.
 */
 
-//solution
-#include <stdio.h>
 
-int main() {
-	int test,n,con=0,flag=0;
-	char let[100];
-	scanf("%d",&test);
-	for(int i=0;i<test;i++){
-	    scanf("%d",&n);
-	    scanf("%s",let);
-	    for(int j=0;j<n;j++){
-	        if(let[j]=='a' || let[j]=='e' || let[j]=='i' || let[j]=='o' || let[j]=='u'){
-	            con=0;
-	    }
-	    else{
-	        con++;
-	        if(con==4){
-	            flag=1;
-	        }
-	    }
-	    }
-	if(flag==1 || con>4){
-	    printf("NO\n");
-	}
-	else{
-	    printf("YES\n");
-	}
-	con=0;
-	flag=0;
-	}
-    return 0;
+//solution
+#include<stdio.h>
+#include<string.h>
+
+char filename[]="weather_data.txt";
+int flag;
+
+struct city{
+    int humidity,temperature;
+    char name[20];
+};
+typedef struct city city;
+
+void storeinfile(city c1[],int num){
+    FILE *file=fopen(filename,"w");
+    if(file==NULL){
+        printf("Error in creating the file!\n");
+        flag=0;
+    }
+    else{
+    for(int i=0;i<num;i++){
+        fprintf(file,"City %d\n  Name : %s\n  Temperature : %d\n  Humidity : %d\n\n",i+1,c1[i].name,c1[i].temperature,c1[i].humidity);
+    }
+    fclose(file);
+    flag=1;
+    }
 }
 
+int searchForCustomer(city c1[],char search[],int num){
+    int pos,point=0;
+    for (int i=0;i<num;i++){
+        if(strcmp(c1[i].name,search)==0){
+            pos=i;
+            point=1;
+            break;
+        }
+    }
+    if(point==1){
+        return pos;
+    }
+    else{
+        flag=0;
+    }
+    
+}
+
+int main(){
+    int num,pos;
+    char search[20];
+    printf("Enter number of cities :");
+    scanf("%d",&num);
+    city c1[num];
+    printf("(city,temperature,humidity)\n");
+    for (int i=0;i<num;i++){
+        printf("City %d :",i+1);
+        scanf("%s%d%d",c1[i].name,&c1[i].temperature,&c1[i].humidity);
+    }
+    storeinfile(c1,num);
+    printf("Enter city name to be searched :");
+    scanf("%s",search);
+    pos=searchForCustomer(c1,search,num);
+    if(flag==1){
+        printf("Weather found in %s : %dC , %d %% Humidity",c1[pos].name,c1[pos].temperature,c1[pos].humidity);
+        printf("\nRecord saved in %s\n",filename);
+    }
+    else{
+        printf("Error!");
+    }
+    return 0;
+}

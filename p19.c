@@ -1,105 +1,57 @@
 /*
-19.Write a C program to record and search weather data for multiple cities. The program should:
+19.Greater Average
+You are given 33 numbers A,B,A,B, and CC.
+Determine whether the average of AA and BB is strictly greater than CC or not?
+NOTE: Average of AA and BB is defined as (A+B)22(A+B)​. For example, average of 55 and 99 is 77, average of 55 and 88 is 6.56.5.
+Input Format
+    The first line of input will contain a single integer TT, denoting the number of test cases.
+    Each test case consists of 33 integers A,B,A,B, and CC.
+Output Format
 
-Accept details for multiple cities including:
+For each test case, output YES if average of AA and BB is strictly greater than CC, NO otherwise.
 
-City Name
+You may print each character of the string in uppercase or lowercase (for example, the strings YeS, yEs, yes and YES will all be treated as identical).
+Constraints
 
-Temperature (°C)
+    1≤T≤10001≤T≤1000
+    1≤A,B,C≤101≤A,B,C≤10
 
-Humidity (%)
-
-Store the collected data in a text file named weather_data.txt.
-
-Allow the user to search for a city by name.
-
-If the city is found, display its temperature and humidity, and confirm that the data has been stored in the file.
-
-If the city is not found or file operations fail, display an appropriate error message.
-
-Specifications:
-
-Define a structure city with members: name, temperature, and humidity.
-
-Use a typedef for ease of usage.
-
-Implement the following functions:
-
-storeinfile() – writes all city weather details to a file.
-
-searchForCustomer() – searches for a city by name using strcmp() and returns its index.
-
-Use a global flag variable to track errors in file handling and search results.
+Sample 1:
+Input
+5
+5 9 6
+5 8 6
+5 7 6
+4 9 8
+3 7 2
+Output
+YES
+YES
+NO
+NO
+YES
+Explanation:
+Test case 11: The average value of 55 and 99 is 77 which is strictly greater than 66.
+Test case 22: The average value of 55 and 88 is 6.56.5 which is strictly greater than 66.
+Test case 33: The average value of 55 and 77 is 66 which is not strictly greater than 66.
+Test case 44: The average value of 44 and 99 is 6.56.5 which is not strictly greater than 88.
+Test case 55: The average value of 33 and 77 is 55 which is strictly greater than 22.
 */
 
-
 //solution
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
 
-char filename[]="weather_data.txt";
-int flag;
-
-struct city{
-    int humidity,temperature;
-    char name[20];
-};
-typedef struct city city;
-
-void storeinfile(city c1[],int num){
-    FILE *file=fopen(filename,"w");
-    if(file==NULL){
-        printf("Error in creating the file!\n");
-        flag=0;
+int main() {
+	int a,b,c,d;
+	scanf("%d",&d);
+	for(int i=0;i<d;i++){
+	scanf("%d%d%d",&a,&b,&c);
+    if(c*2<a+b){
+        printf("YES\n");
     }
     else{
-    for(int i=0;i<num;i++){
-        fprintf(file,"City %d\n  Name : %s\n  Temperature : %d\n  Humidity : %d\n\n",i+1,c1[i].name,c1[i].temperature,c1[i].humidity);
+        printf("NO\n");
     }
-    fclose(file);
-    flag=1;
-    }
-}
-
-int searchForCustomer(city c1[],char search[],int num){
-    int pos,point=0;
-    for (int i=0;i<num;i++){
-        if(strcmp(c1[i].name,search)==0){
-            pos=i;
-            point=1;
-            break;
-        }
-    }
-    if(point==1){
-        return pos;
-    }
-    else{
-        flag=0;
-    }
-    
-}
-
-int main(){
-    int num,pos;
-    char search[20];
-    printf("Enter number of cities :");
-    scanf("%d",&num);
-    city c1[num];
-    printf("(city,temperature,humidity)\n");
-    for (int i=0;i<num;i++){
-        printf("City %d :",i+1);
-        scanf("%s%d%d",c1[i].name,&c1[i].temperature,&c1[i].humidity);
-    }
-    storeinfile(c1,num);
-    printf("Enter city name to be searched :");
-    scanf("%s",search);
-    pos=searchForCustomer(c1,search,num);
-    if(flag==1){
-        printf("Weather found in %s : %dC , %d %% Humidity",c1[pos].name,c1[pos].temperature,c1[pos].humidity);
-        printf("\nRecord saved in %s\n",filename);
-    }
-    else{
-        printf("Error!");
-    }
+	}
     return 0;
 }

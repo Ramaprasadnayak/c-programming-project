@@ -1,84 +1,85 @@
-/*
-8.Write a C program to perform the following operations for a class of students:
+/*Sort Array by Parity
+8.You are given an array of integers. Your task is to sort the array such that all odd numbers come before all even numbers while maintaining the original relative order of the odd and even numbers.
 
-Accept the number of students and subjects.
+Input Format
+The first line contains an integer 
+N
+N (the array size).
+The second line contains 
+N
+N space-separated integers representing the elements of the array.
+Output Format
+Output the sorted array where all odd numbers appear before all even numbers, maintaining the relative order.
 
-Input the marks for each student in each subject.
+Constraints
+1
+≤
+N
+≤
+1
+0
+5
+1≤N≤10 
+5
+ 
+0
+≤
+a
+[
+i
+]
+≤
+1
+0
+9
+0≤a[i]≤10 
+9
+ 
+Sample 1:
+Input
+Output
+5
+3 1 2 4 5
+3 1 5 2 4
+Explanation:
+In the given array, the odd numbers are 3,1 and 5, and the even numbers are 2 and 4. After sorting by parity while maintaining the original order, the result is 3,1,5,2,4.
 
-Calculate the total marks for each student.
+Sample 2:
+Input
+Output
+6
+2 4 6 1 3 5
+1 3 5 2 4 6
+Explanation:
+In the given array, the odd numbers are 1,3 and 5, and the even numbers are 2,4 and 6. After sorting by parity while maintaining the original order, the result is 1,3,5,2,4,6.*/
 
-Sort the students in descending order based on their total marks.
 
-Display the total marks of all students after sorting.
 
-Use functions for:
 
-Reading marks (readmarks)
+//solution
 
-Calculating total marks (calculatetotal)
+#include <stdio.h>
+#include <stdlib.h>
+int N;
+void sortArrayByParity(int* nums) {
+    // Write your code here
+}
 
-Sorting students (sortstudents)
-
-Swapping values (swap)
-
-Printing total marks (printtotalmarks)
-
-Note: Assume a maximum of 100 students and 10 subjects.
- */
-
- //solution
-#include<stdio.h>
-#define max 10
-void calculatetotal(int marks[][max],int num,int sub,int total[]){
-    for(int i=0;i<num;i++){
-        total[i]=0;
-        for(int j=0;j<sub;j++){
-            total[i]+=marks[i][j];
-        }
+int main() {
+    int n;
+    scanf("%d", &n);
+    N=n;
+    int* nums = (int*)malloc(N * sizeof(int));
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &nums[i]);
     }
-}
 
-void swap(int *first,int *second){
-    int temp=(*first);
-    (*first)=(*second);
-    (*second)=(temp);
-}
+    sortArrayByParity(nums);
 
-void sortstudents(int total[],int num){
-    int isswapped=0;
-    do{
-    for(int i=0;i<num-1;i++){
-        if(total[i]<total[i+1]){
-            swap(&total[i],&total[i+1]);
-            isswapped=1;
-        }
+    for (int i = 0; i < N; i++) {
+        printf("%d ", nums[i]);
     }
-    num--;
-}while(isswapped);
-}
-void readmarks(int marks[][max],int num,int sub){
-    printf("Enter marks:");
-    for(int i=0;i<num;i++){
-        for(int j=0;j<sub;j++){
-            scanf("%d",&marks[i][j]);
-        }
-    }
-}
-void printtotalmarks(int total[],int num){
-    for(int i=0;i<num;i++){
-        printf("Total marks: %d",total[i]);
-    }
-}
-int main(){
-    int num,sub,total[100];
-    int marks[100][max];
-    printf("Enter number of students:");
-    scanf("%d",&num);
-    printf("Enter number of subjects:");
-    scanf("%d",&sub);
-    readmarks(marks,num,sub);
-    sortstudents(total,num);
-    calculatetotal(marks,num,sub,total);
-    printtotalmarks(total,num);
+
+    free(nums);
     return 0;
 }

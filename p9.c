@@ -1,57 +1,94 @@
 /*
-9.Greater Average
-You are given 33 numbers A,B,A,B, and CC.
-Determine whether the average of AA and BB is strictly greater than CC or not?
-NOTE: Average of AA and BB is defined as (A+B)22(A+B)​. For example, average of 55 and 99 is 77, average of 55 and 88 is 6.56.5.
-Input Format
-    The first line of input will contain a single integer TT, denoting the number of test cases.
-    Each test case consists of 33 integers A,B,A,B, and CC.
-Output Format
+9.Write a C program to manage student data using structures. The program should:
 
-For each test case, output YES if average of AA and BB is strictly greater than CC, NO otherwise.
+Accept details of multiple students, including Roll Number, Name, Course, and Marks.
 
-You may print each character of the string in uppercase or lowercase (for example, the strings YeS, yEs, yes and YES will all be treated as identical).
-Constraints
+Store this data in a file named student_data.txt.
 
-    1≤T≤10001≤T≤1000
-    1≤A,B,C≤101≤A,B,C≤10
+Allow the user to search for a student by Roll Number.
 
-Sample 1:
-Input
-5
-5 9 6
-5 8 6
-5 7 6
-4 9 8
-3 7 2
-Output
-YES
-YES
-NO
-NO
-YES
-Explanation:
-Test case 11: The average value of 55 and 99 is 77 which is strictly greater than 66.
-Test case 22: The average value of 55 and 88 is 6.56.5 which is strictly greater than 66.
-Test case 33: The average value of 55 and 77 is 66 which is not strictly greater than 66.
-Test case 44: The average value of 44 and 99 is 6.56.5 which is not strictly greater than 88.
-Test case 55: The average value of 33 and 77 is 55 which is strictly greater than 22.
+If the student is found, display the student’s details and confirm that the data has been stored in the file.
+
+If the student is not found or if file operations fail, print an appropriate error message.
+
+Requirements:
+
+Use a struct named Student with fields for roll number, name, course, and marks.
+
+Use typedef to simplify structure usage.
+
+Implement functions for:
+
+Storing student data in a file (storeinfile)
+
+Searching for a student by roll number (searchstudents)
+
+Handle file errors and search errors using a flag variable.
 */
 
 //solution
-#include <stdio.h>
+#include<stdio.h>
+struct Student{
+    int roll,marks;
+    char name[20];
+    char course[20];
+};
+typedef struct Student student;
+char filename[] = "student_data.txt";
+int flag=1;
 
-int main() {
-	int a,b,c,d;
-	scanf("%d",&d);
-	for(int i=0;i<d;i++){
-	scanf("%d%d%d",&a,&b,&c);
-    if(c*2<a+b){
-        printf("YES\n");
+void storeinfile(student s1[],int num){
+    FILE *file =fopen(filename,"w");
+    if(file == NULL){
+        printf("\nunable to create the file\n");
+        flag=0;
     }
     else{
-        printf("NO\n");
+    for(int i=0;i<num;i++){
+        fprintf(file,"Student %d:\n  Rollno : %d\n  Name : %s\n  Course : %s\n  Marks : %d\n\n",i+1,s1[i].roll,s1[i].name,s1[i].course,s1[i].marks);
     }
-	}
+    printf("\nfile created successfully!\n");
+    fclose(file);
+    }
+}
+
+int searchstudents(student s1[],int num,int search){\
+    int pos,point=0;
+    for(int i=0;i<num;i++){
+        if(s1[i].roll==search){
+            pos=i;
+            point=1;
+            break;
+        }
+    }
+    if(point==1){
+        return pos;
+    }
+    else{
+        printf("roll number not found");
+        flag=0;
+    }
+}
+
+int main(){
+    int num,search,pos;
+    student s1[20];
+    printf("Enter the number of students:");
+    scanf("%d",&num);
+    printf("(Rollno,Name,course,marks)\n");
+    for(int i=0;i<num;i++){
+        printf("Student %d:",i+1);
+        scanf("%d%s%s%d",&s1[i].roll,s1[i].name,s1[i].course,&s1[i].marks);
+    }
+    storeinfile(s1,num);
+    printf("Enter the rollno for searhing :");
+    scanf("%d",&search);
+    pos=searchstudents(s1,num,search);
+    if(flag==1){
+    printf("Student Found: %s, %s, Marks: %d \nRecord saved in %s\n",s1[pos].name,s1[pos].course,s1[pos].marks,filename);
+    }
+    else{
+        printf("Error!");
+    }
     return 0;
 }

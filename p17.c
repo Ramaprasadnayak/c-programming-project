@@ -1,94 +1,81 @@
 /*
-17.Write a C program to manage student data using structures. The program should:
+Question -17
 
-Accept details of multiple students, including Roll Number, Name, Course, and Marks.
+`ATM Transaction System`  
+`Scenario:`  
+An ATM allows users to:  
+1. `Withdraw Money`  
+2. `Deposit Money`  
+3. `Check Balance`  
 
-Store this data in a file named student_data.txt.
+Use a `function with switch-case` 
+to `simulate an ATM transaction`.
 
-Allow the user to search for a student by Roll Number.
+`Input Example:`  
+```
+Enter your choice:
+1. Withdraw
+2. Deposit
+3. Check Balance
+Choice: 1
+Enter Amount: 2000
+```
 
-If the student is found, display the student’s details and confirm that the data has been stored in the file.
-
-If the student is not found or if file operations fail, print an appropriate error message.
-
-Requirements:
-
-Use a struct named Student with fields for roll number, name, course, and marks.
-
-Use typedef to simplify structure usage.
-
-Implement functions for:
-
-Storing student data in a file (storeinfile)
-
-Searching for a student by roll number (searchstudents)
-
-Handle file errors and search errors using a flag variable.
-*/
+`Output Example:`  
+```
+Transaction Successful. Remaining Balance: ₹8000
+```*/
 
 //solution
 #include<stdio.h>
-struct Student{
-    int roll,marks;
-    char name[20];
-    char course[20];
-};
-typedef struct Student student;
-char filename[] = "student_data.txt";
-int flag=1;
-
-void storeinfile(student s1[],int num){
-    FILE *file =fopen(filename,"w");
-    if(file == NULL){
-        printf("\nunable to create the file\n");
-        flag=0;
+int withdraw(int amount,int val){
+    if((amount-val) <0){
+        printf("Insufficient bank balance..");
     }
     else{
-    for(int i=0;i<num;i++){
-        fprintf(file,"Student %d:\n  Rollno : %d\n  Name : %s\n  Course : %s\n  Marks : %d\n\n",i+1,s1[i].roll,s1[i].name,s1[i].course,s1[i].marks);
+        amount-=val;
+        printf("%d amount withdrawed\n",val);
     }
-    printf("\nfile created successfully!\n");
-    fclose(file);
-    }
+    return amount;
 }
 
-int searchstudents(student s1[],int num,int search){\
-    int pos,point=0;
-    for(int i=0;i<num;i++){
-        if(s1[i].roll==search){
-            pos=i;
-            point=1;
-            break;
-        }
-    }
-    if(point==1){
-        return pos;
-    }
-    else{
-        printf("roll number not found");
-        flag=0;
-    }
+int deposit(int amount,int val){
+    amount+=val;
+    printf("%d amount deposited",val);
+    return amount;
+}
+
+void checkbalance(int amount){
+    printf("The current bank balance is: %d",amount);
 }
 
 int main(){
-    int num,search,pos;
-    student s1[20];
-    printf("Enter the number of students:");
-    scanf("%d",&num);
-    printf("(Rollno,Name,course,marks)\n");
-    for(int i=0;i<num;i++){
-        printf("Student %d:",i+1);
-        scanf("%d%s%s%d",&s1[i].roll,s1[i].name,s1[i].course,&s1[i].marks);
+    int choice,i,amount=0,val;
+    while(choice!=4){
+    printf("\nEnter your choice:\n1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit\nChoice: ");
+    scanf("%d",&choice);
+    switch(choice){
+        case 1:
+        printf("Enter value to be withdrawed: ");
+        scanf("%d",&val);
+        amount=withdraw(amount,val);
+        break;
+
+        case 2:
+        printf("Enter value to be deposited: ");
+        scanf("%d",&val);
+        amount=deposit(amount,val);
+        break;
+        
+        case 3:checkbalance(amount);
+        break;
+        
+        case 4:printf("Thank You");
+        break;
+
+        default:printf("Enter a valid choice");
+
     }
-    storeinfile(s1,num);
-    printf("Enter the rollno for searhing :");
-    scanf("%d",&search);
-    pos=searchstudents(s1,num,search);
-    if(flag==1){
-    printf("Student Found: %s, %s, Marks: %d \nRecord saved in %s\n",s1[pos].name,s1[pos].course,s1[pos].marks,filename);
-    }
-    else{
-        printf("Error!");
-    }
-    return 0;
+}
+return 0;
 }
